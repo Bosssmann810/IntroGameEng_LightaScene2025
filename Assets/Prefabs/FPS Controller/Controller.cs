@@ -10,11 +10,11 @@ using UnityEditor;
 
 public class Controller : MonoBehaviour
 {
-    
+    public GameObject flashlight;
+   public bool on = false;
     public static Controller Instance { get; protected set; }
-
     public Camera MainCamera;
-
+    public Transform lightpos;
     public Transform CameraPosition;   
 
     [Header("Control Settings")]
@@ -49,6 +49,8 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
+        flashlight.SetActive(false);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -90,6 +92,22 @@ public class Controller : MonoBehaviour
         {
             m_GroundedTimer = 0.0f;
             m_Grounded = true;
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("clicked");
+            if (on == false)
+            {
+                Debug.Log(on);
+                flashlight.SetActive(true);
+                on = true;
+            }
+            
+            else if (on == true)
+            {
+                flashlight.SetActive(false);
+                on = false;
+            }
         }
 
         Speed = 0;
@@ -142,6 +160,7 @@ public class Controller : MonoBehaviour
             currentAngles = CameraPosition.transform.localEulerAngles;
             currentAngles.x = m_VerticalAngle;
             CameraPosition.transform.localEulerAngles = currentAngles;
+            lightpos.transform.localEulerAngles = currentAngles;
 
 
 
@@ -162,7 +181,10 @@ public class Controller : MonoBehaviour
             {
                 //play a sound after being in air and landing
             }
+
+            
         }
 
     }
+    
 }
