@@ -1,18 +1,12 @@
 using UnityEngine;
-using UnityEngine.Playables;
-public class finalscaretrigger : MonoBehaviour
+
+public class ending : MonoBehaviour
 {
-    public PlayableDirector final;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        final.Play();
-        
+        Debug.Log("ended");
+        Application.Quit();
     }
 
     // Update is called once per frame
